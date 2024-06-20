@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
+#include <stdarg.h>
 
 typedef enum errorType {
   ERR_OK,
@@ -43,9 +44,21 @@ void print_error(){
   else printf(" error: \"%s\" (%d)\n",err.msg,errno);
 }
 
-void exit_with_error(ErrorType type, char* msg){
+void exit_with_error(ErrorType type, const char* format,...){
   err.type = type;
-  err.msg = msg;
+  va_list args;
+  va_list args_copy;
+  va_start(args, format);
+  va_copy(args_copy,args);
+  char* msg = NULL;
+  size_t len = vsnprintf(NULL, 0, format, args);
+  msg = malloc(len+1);
+  if(msg){
+    vsprintf(msg, format, args_copy);
+    err.msg = msg;
+  }else err.msg = "error occured, error cannot be presented at this time";
+  va_end(args_copy);
+  va_end(args);
   print_error();
   exit(errno);
 }
@@ -191,12 +204,12 @@ char* is_keyword(char* word){
   kw_matcher("if");
   kw_matcher("then");
   kw_matcher("elseif");
+  kw_matcher("else");
   kw_matcher("endif");
   kw_matcher("while");
-  kw_matcher("foreach");
+  kw_matcher("do");
   kw_matcher("in");
-  kw_matcher("loop");
-  kw_matcher("endloop");
+  kw_matcher("endwhite");
   kw_matcher("nil");
   return NULL;
 }
@@ -247,7 +260,7 @@ Token* lex(char* contents){
 	err.row = row_start;
 	err.col = col_start;
 	free_tokens(tokens);
-	exit_with_error(ERR_SYNTAX, "unable to find the end of string literal");
+	exit_with_error(ERR_SYNTAX, "unable to find the end of string literal starting with \'%c\'",matcher);
       }
       Token* token = new_token(TKT_LIT_STR, current_char, lit_ite-current_char,"str", row_start, col_start);
       append_token;

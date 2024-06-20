@@ -16,18 +16,17 @@ print(p,x,y,z);
 # hello
 def a = array(1,2,3,4,50);
 
-foreach item in a loop;
+while item in a do;
 println(i**i);
-endloop;
+endwhile;
 
 def i = 0;
-when i<10 loop;
+while i<10 do;
 println(i+1);
 i+=1;
-endloop;
+endwhile;
 
 def c = true;
-
 
 + - * / %
 ** //

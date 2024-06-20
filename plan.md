@@ -60,23 +60,23 @@ endif;
 ```
 
 ### Loops:
-loop
+
 while
-endloop
-foreach
+do
+endwhile
 in
 break
 continue
 
 #### Examples:
 ```
-while a>20 loop;
+while a>20 do;
 print(a);
-endloop;
+endwhile;
 
-foreach i in 0..5 loop;
+while i in 0..5 do;
 print(i**i);
-endloop;
+endwhile;
 ```
 
 ### Define variables:
