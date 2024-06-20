@@ -1,0 +1,42 @@
+
+
+  def x = 24;
+def y = "Hello # World";
+def z:int;
+def p:double = 64.213;
+
+z = 26;
+
+if z > 19 then;
+print 'you are 23.425 fine';
+endif;
+
+print("Hi mate");
+print(p,x,y,z);
+# hello
+def a = array(1,2,3,4,50);
+
+foreach item in a loop;
+println(i**i);
+endloop;
+
+def i = 0;
+when i<10 loop;
+println(i+1);
+i+=1;
+endloop;
+
+def c = true;
+
+
++ - * / %
+** //
+& | ^ ~ >> <<
+== != > >= < <=
+= += -= *= /= %= **= //=
+&= |= ^= >>= <<=
+.. .
+? :
+&& || !
+
+
